@@ -1,56 +1,82 @@
 #1. Importa el paquete NUMPY bajo el nombre np.
 
-#[tu código aquí]
+import numpy as np
 
 
 #2. Imprime la versión de NUMPY y la configuración.
 
-#[tu código aquí]
-
+print(np.__version__)
+np.show_config()
 
 #3. Genera un array tridimensional de 2x3x5 con valores aleatorios. Asigna el array a la variable "a"
 # Desafío: hay al menos tres maneras fáciles que usan numpy para generar arrays aleatorios. ¿Cuántas formas puedes encontrar?
 
-#[tu código aquí]
+# Método 1: np.random.rand
+a1 = np.random.rand(2, 3, 5)
+
+# Método 2: np.random.randn
+a2 = np.random.randn(2, 3, 5)
+
 
 #4. Imprime a.
 
-#[tu código aquí]
+print(a1)
+
+
 #5. Crea un array tridimensional de 5x2x3 con todos los valores igual a 1.
 #Asigna el array a la variable "b"
 
-#[tu código aquí]
+b = np.ones((5, 2, 3))
 
 #6. Imprime b.
 
-#[tu código aquí]
+print(b)
 
 #7. ¿Tienen a y b el mismo tamaño? ¿Cómo lo demuestras en código Python?
 
-#[tu código aquí]
+print("Forma de a1:", a1.shape)
+print("Forma de b:", b.shape)
 
 #8. ¿Es posible sumar a y b? ¿Por qué sí o por qué no?
 
-#[tu código aquí]
+try:
+  suma = a1 + b
+  print("Sí, es posible sumar a y b")
+except Exception as e:
+  print("No, NO es posible sumar a y b:", e)
 
+la suma no es posible porque los arrays 'a1' y 'b' tienen formas incompatibles.
 
 #9. Transpone b para que tenga la misma estructura que a (es decir, se convierta en un array de 2x3x5). Asigna el array transpuesto a la variable "c".
 
-#[tu código aquí]
+c = b.transpose(1, 2, 0)
+print(c.shape)
+
 
 #10. Intenta sumar a y c. Ahora debería funcionar. Asigna la suma a la variable "d". Pero, ¿por qué funciona ahora?
 
-#[tu código aquí]
+try:
+  d = a1 + c
+  print(d)
+except ValueError as e:
+  print(e)
 
 #11. Imprime a y d. ¿Notas la diferencia y la relación entre los dos arrays en términos de los valores? Explica.
 
-#[tu código aquí]
+print (a1)
+print (d)
 
+No.
 
-#12. Multiplica a y c. Asigna el resultado a e.
+#12. Multiplica a y c. Asigna el resultado e.
 
-#[tu código aquí]
+a1_transposed = a1.transpose(2, 0, 1) 
 
+e = np.matmul(a1_transposed, c)
+
+print("Forma de e:", e.shape)
+print("e:")
+print(e)
 
 #13. ¿Es e igual a a? ¿Por qué sí o por qué no?
 
@@ -60,7 +86,17 @@
 
 #14. Identifica los valores máximos, mínimos y medios en d. Asigna esos valores a las variables "d_max", "d_min" y "d_mean"
 
-#[tu código aquí]
+# Valores máximos
+d_max = np.max(d)
+print("Valor máximo de d:", d_max)
+
+# Valores mínimos
+d_min = np.min(d)
+print("Valor mínimo de d:", d_min)
+
+# Valor medio
+d_mean = np.mean(d)
+print("Valor medio de d:", d_mean)
 
 
 #15. Ahora queremos etiquetar los valores en d. Primero crea un array vacío "f" con la misma forma (es decir, 2x3x5) que d usando `np.empty`.

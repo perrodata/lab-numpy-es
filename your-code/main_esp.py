@@ -1,108 +1,109 @@
 #1. Importa el paquete NUMPY bajo el nombre np.
 
+#[tu código aquí]
 import numpy as np
-
 
 #2. Imprime la versión de NUMPY y la configuración.
 
-print(np.__version__)
-np.show_config()
+#[tu código aquí]
+print(str(np.version.version))
 
 #3. Genera un array tridimensional de 2x3x5 con valores aleatorios. Asigna el array a la variable "a"
 # Desafío: hay al menos tres maneras fáciles que usan numpy para generar arrays aleatorios. ¿Cuántas formas puedes encontrar?
 
-# Método 1: np.random.rand
-a1 = np.random.rand(2, 3, 5)
-
-# Método 2: np.random.randn
-a2 = np.random.randn(2, 3, 5)
-
-
+a = np.random.random((2, 3, 5))
+#print(a)
+a = np.random.randint(10, size=(2, 3, 5))
+#print(a)
+#a =  np.random.arange((2, 3, 5))
+#print(a)
 #4. Imprime a.
 
-print(a1)
+print(a)
 
-
+#[tu código aquí]
 #5. Crea un array tridimensional de 5x2x3 con todos los valores igual a 1.
 #Asigna el array a la variable "b"
 
+#[tu código aquí]
 b = np.ones((5, 2, 3))
 
 #6. Imprime b.
 
+#[tu código aquí]
 print(b)
 
 #7. ¿Tienen a y b el mismo tamaño? ¿Cómo lo demuestras en código Python?
 
-print("Forma de a1:", a1.shape)
-print("Forma de b:", b.shape)
+#[tu código aquí]
+print(a.size == b.size)
+
+#print("\nThe dimension is:", a.ndim)
+#print("The shape is:", a.shape)
+#print("The size is:", a.size)
+#print("\nThe dimension is:", b.ndim)
+#print("The shape is:", b.shape)
+#print("The size is:", b.size)
 
 #8. ¿Es posible sumar a y b? ¿Por qué sí o por qué no?
 
-try:
-  suma = a1 + b
-  print("Sí, es posible sumar a y b")
-except Exception as e:
-  print("No, NO es posible sumar a y b:", e)
+#[tu código aquí]
+#c = a + b
+'''no tienen el mismo shape: No operands could not be broadcast together with shapes (2,3,5) (5,2,3)'''
 
-la suma no es posible porque los arrays 'a1' y 'b' tienen formas incompatibles.
 
 #9. Transpone b para que tenga la misma estructura que a (es decir, se convierta en un array de 2x3x5). Asigna el array transpuesto a la variable "c".
 
-c = b.transpose(1, 2, 0)
-print(c.shape)
-
+#[tu código aquí]
+c= np.transpose(b, (1, 2, 0)) 
+print("The shape is:", a.shape)
+print("The shape is:", b.shape)
+print("The shape is:", c.shape)
 
 #10. Intenta sumar a y c. Ahora debería funcionar. Asigna la suma a la variable "d". Pero, ¿por qué funciona ahora?
 
-try:
-  d = a1 + c
-  print(d)
-except ValueError as e:
-  print(e)
+#[tu código aquí]
+d = a + c
+'''Ahora si porque si que tienen el mismo shape'''
+
 
 #11. Imprime a y d. ¿Notas la diferencia y la relación entre los dos arrays en términos de los valores? Explica.
 
-print (a1)
-print (d)
+#[tu código aquí]
+print("a:")
+print(a)
+print("d:")
+print(d)
 
-No.
+#12. Multiplica a y c. Asigna el resultado a e.
 
-#12. Multiplica a y c. Asigna el resultado e.
+#[tu código aquí]
 
-a1_transposed = a1.transpose(2, 0, 1) 
+e = a * c
+e =  np.multiply(a, c)
 
-e = np.matmul(a1_transposed, c)
-
-print("Forma de e:", e.shape)
-print("e:")
-print(e)
 
 #13. ¿Es e igual a a? ¿Por qué sí o por qué no?
 
 #[tu código aquí]
+print(np.array_equal(a, e))
 
 
 
 #14. Identifica los valores máximos, mínimos y medios en d. Asigna esos valores a las variables "d_max", "d_min" y "d_mean"
 
-# Valores máximos
+#[tu código aquí]
 d_max = np.max(d)
-print("Valor máximo de d:", d_max)
-
-# Valores mínimos
 d_min = np.min(d)
-print("Valor mínimo de d:", d_min)
-
-# Valor medio
-d_mean = np.mean(d)
-print("Valor medio de d:", d_mean)
-
-
+d_mean = np.mean(d) 
+print(f"{d_min} - {d_mean} - {d_max}")
 #15. Ahora queremos etiquetar los valores en d. Primero crea un array vacío "f" con la misma forma (es decir, 2x3x5) que d usando `np.empty`.
 
 #[tu código aquí]
+f = np.empty_like(d)
 
+print("f:")
+print(f)
 
 """
 #16. Rellena los valores en f. Para cada valor en d, si es mayor que d_min pero menor que d_mean, asigna 25 al valor correspondiente en f.
@@ -115,6 +116,12 @@ Nota: no necesitas usar Numpy en esta pregunta.
 """
 
 #[tu código aquí]
+# Aplica las condiciones para llenar f
+f[(d == d_min)] = 0
+f[(d == d_max)] = 100
+f[(d > d_mean) & (d < d_max)] = 75
+f[(d == d_mean)] = 50
+f[(d > d_min) & (d < d_mean)] = 25
 
 
 
@@ -141,7 +148,10 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[tu código aquí]
-
+print("d")
+print(d)
+print("f")
+print(f)
 
 
 """
@@ -158,3 +168,13 @@ De nuevo, no necesitas Numpy en esta pregunta.
 """
 
 #[tu código aquí]
+f = np.empty_like(d, dtype=str)
+
+f[(d == d_min)] = 'A'
+f[(d == d_max)] = 'E'
+f[(d > d_mean) & (d < d_max)] = 'D'
+f[(d == d_mean)] = 'C'
+f[(d > d_min) & (d < d_mean)] = 'B'
+
+print("digits")
+print(f)
